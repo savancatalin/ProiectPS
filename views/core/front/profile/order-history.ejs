@@ -1,0 +1,83 @@
+<div class="row">
+    <div class="col-sm-12">
+
+        <h3><i class="fa fa-fw fa-truck"> </i> <%= __('Order History') %> </h3>
+              
+        <Table class="table table-hover">
+                    
+            <Thead>
+                      
+            <Tr>
+                            
+                <Th> #</th>
+                            
+                <Th> <%= __('Date') %> </th>
+                            
+                <Th> <%= __('Name') %> </th>
+                            
+                <Th> <%= __('Telephone') %> </th>
+                            
+                <Th> <%= __('address') %> </th>
+                            
+                <Th> <%= __('Payment Status') %> </th>
+                            
+
+
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+
+            <% if (typeof orders == 'object' && orders) { %>
+
+            <% orders.forEach(function(order){ %>
+
+            <tr data-id="<%= order.id %>">
+                <td><%= order.id %></td>
+                <td><%= order.createdAt %></td>
+                <td><%= order.name %></td>
+                <td><%= order.phone %></td>
+                <td><%= order.address %></td>
+                <td>
+                    <% if (order.shipping > 0) { %>
+
+                    <Span class="badge badge-success"> <%= __('advance payment') %> </span>
+                                  
+                    <% } else { %>
+                                  <Span class="badge badge-warning"> <%= __('paid') %> </span>
+                                  
+                    <% } %>
+                               
+                </td>
+
+            </tr>
+
+            <% }) %>
+
+            <% } %>
+            </tbody>
+        </table>
+
+        <div style="text-align: center;">
+            <ul class="pagination">
+                <li><a href="/profile">&laquo;</a></li>
+                <% pages.forEach(function(index){ %>
+
+                <% if (typeof loop == 'object' && loop) { %>
+
+                {% if page == loop.index %}
+                <li class="active"><a href="/profile?page=<%= loop.index %>"><%= loop.index %></a></li>
+                {% else %}
+                <li><a href="/profile?page=<%= loop.index %>"><%= loop.index %></a></li>
+                {% endif %}
+                {% if loop.last %}
+                <li><a href="/profile?page=<%= loop.index %>">&raquo;</a></li>
+                {% endif %}
+
+                <% } %>
+
+                <% }) %>
+            </ul>
+        </div>
+    </div>
+</div>
